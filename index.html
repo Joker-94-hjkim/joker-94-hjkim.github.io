@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김혁진 | Kim Hyeok Jin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f9f7;
+  --bg2: #eef3ef;
+  --surface: #ffffff;
+  --surface2: #e6ede7;
+  --accent: #1a7a4a;
+  --accent2: #0d7c6e;
+  --accent3: #b45309;
+  --text: #1a2e22;
+  --text-muted: #4a6655;
+  --text-faint: #8aaa94;
+  --border: #cfddd2;
+  --border2: #b0c8b8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Serif KR',serif;font-weight:300;line-height:1.8;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(247,249,247,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:.2em;text-transform:uppercase}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text-muted);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 3rem 4rem;gap:4rem;position:relative;overflow:hidden}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.6;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+.hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(26,122,74,.12) 0%,transparent 70%);top:0%;right:-5%;pointer-events:none}
+.hero-left{position:relative;z-index:1}
+.hero-tag{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
+.hero-name-ko{font-size:clamp(1.6rem,3vw,2.6rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:.3rem}
+.hero-name-en{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.6rem);color:var(--text-muted);margin-bottom:2rem;font-weight:400}
+.hero-role{font-family:'DM Mono',monospace;font-size:.8rem;color:var(--accent2);letter-spacing:.1em;margin-bottom:1.5rem;line-height:1.9}
+.hero-desc{font-size:.95rem;color:var(--text-muted);line-height:2;max-width:480px;margin-bottom:2.5rem}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem}
+.tag{font-family:'DM Mono',monospace;font-size:.68rem;padding:.35rem .9rem;border:1px solid var(--border2);border-radius:2px;color:var(--text-muted);letter-spacing:.1em;transition:all .2s;cursor:default}
+.tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(77,255,145,.04)}
+.hero-btns{display:flex;gap:1rem}
+.btn-primary{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2rem;background:var(--accent);color:var(--bg);border:none;cursor:pointer;text-decoration:none;transition:all .2s;font-weight:500}
+.btn-primary:hover{background:#3de07d;transform:translateY(-1px)}
+.btn-outline{font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;padding:.9rem 2rem;background:transparent;color:var(--text-muted);border:1px solid var(--border2);cursor:pointer;text-decoration:none;transition:all .2s}
+.btn-outline:hover{border-color:var(--text-muted);color:var(--text)}
+.hero-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.5rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem 2rem;position:relative;overflow:hidden;transition:border-color .3s}
+.stat-card:hover{border-color:var(--border2)}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.stat-card:nth-child(2)::before{background:var(--accent2)}
+.stat-card:nth-child(3)::before{background:var(--accent3)}
+.stat-label{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text-faint);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.8rem}
+.stat-value{font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:.3rem}
+.stat-card:nth-child(1) .stat-value{color:var(--accent)}
+.stat-card:nth-child(2) .stat-value{color:var(--accent2)}
+.stat-card:nth-child(3) .stat-value{color:var(--accent3)}
+.stat-sub{font-size:.82rem;color:var(--text-muted)}
+section{padding:6rem 3rem;border-top:1px solid var(--border)}
+.section-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:4rem}
+.section-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text-faint);letter-spacing:.2em}
+.section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em}
+.section-line{flex:1;height:1px;background:var(--border)}
+.research-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:var(--border)}
+.research-item{background:var(--bg);padding:2.5rem;position:relative;overflow:hidden;transition:background .3s}
+.research-item:hover{background:var(--surface)}
+.research-icon{font-size:2rem;margin-bottom:1rem}
+.research-item-title{font-size:1.05rem;font-weight:600;margin-bottom:.8rem;line-height:1.4}
+.research-item-desc{font-size:.85rem;color:var(--text-muted);line-height:1.9}
+.pub-list{display:flex;flex-direction:column;gap:0}
+.pub-item{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--border);transition:background .2s}
+.pub-item:hover{background:rgba(255,255,255,.01)}
+.pub-badge{font-family:'DM Mono',monospace;font-size:.6rem;padding:.3rem .7rem;letter-spacing:.1em;white-space:nowrap;font-weight:500;margin-top:.2rem}
+.badge-sci{background:rgba(77,255,145,.1);color:var(--accent);border:1px solid rgba(77,255,145,.2)}
+.badge-domestic{background:rgba(45,212,191,.1);color:var(--accent2);border:1px solid rgba(45,212,191,.2)}
+.badge-thesis{background:rgba(251,191,36,.1);color:var(--accent3);border:1px solid rgba(251,191,36,.2)}
+.pub-title{font-size:.95rem;font-weight:600;line-height:1.5;margin-bottom:.4rem;color:var(--text)}
+.pub-journal{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text-muted)}
+.pub-authors{font-size:.8rem;color:var(--text-faint);margin-top:.3rem}
+.pub-authors .me{color:var(--accent);font-weight:600}
+.pub-year{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--text-faint);white-space:nowrap;margin-top:.2rem}
+.exp-timeline{position:relative}
+.exp-timeline::before{content:'';position:absolute;left:140px;top:0;bottom:0;width:1px;background:var(--border)}
+.exp-item{display:grid;grid-template-columns:140px 1fr;gap:3rem;padding:2rem 0;position:relative}
+.exp-item::before{content:'';position:absolute;left:137px;top:2.6rem;width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 3px var(--bg),0 0 0 4px var(--border2)}
+.exp-item.current::before{box-shadow:0 0 0 3px var(--bg),0 0 8px var(--accent)}
+.exp-date{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text-faint);letter-spacing:.05em;padding-top:.2rem;text-align:right}
+.exp-current-badge{display:inline-block;background:rgba(77,255,145,.1);color:var(--accent);border:1px solid rgba(77,255,145,.2);font-size:.6rem;padding:.2rem .5rem;letter-spacing:.1em;margin-top:.4rem;font-family:'DM Mono',monospace}
+.exp-org{font-size:1rem;font-weight:600;margin-bottom:.2rem}
+.exp-role{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--accent2);letter-spacing:.1em;margin-bottom:.8rem}
+.exp-dept{font-size:.82rem;color:var(--text-muted);margin-bottom:.6rem}
+.exp-desc{font-size:.83rem;color:var(--text-faint);line-height:1.9}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.proj-card{background:var(--bg2);padding:2rem;transition:background .3s}
+.proj-card:hover{background:var(--surface)}
+.proj-agency{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
+.proj-title{font-size:.9rem;font-weight:600;line-height:1.5;margin-bottom:1rem;color:var(--text)}
+.proj-period{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text-faint)}
+.qual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.qual-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;border-left:3px solid var(--border2)}
+.qual-card.lang{border-left-color:var(--accent)}
+.qual-card.cert{border-left-color:var(--accent2)}
+.qual-name{font-size:.95rem;font-weight:600;margin-bottom:.3rem}
+.qual-detail{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--text-muted)}
+#contact{background:var(--bg2);text-align:center;padding:6rem 3rem;border-top:1px solid var(--border)}
+.contact-inner{max-width:600px;margin:0 auto}
+.contact-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;margin-bottom:1rem}
+.contact-sub{color:var(--text-muted);margin-bottom:2.5rem;font-size:.92rem}
+.contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.contact-link{font-family:'DM Mono',monospace;font-size:.72rem;padding:.8rem 1.5rem;border:1px solid var(--border2);color:var(--text-muted);text-decoration:none;letter-spacing:.1em;transition:all .2s}
+.contact-link:hover{border-color:var(--accent);color:var(--accent)}
+footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-text{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--text-faint);letter-spacing:.1em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp .7s ease forwards}
+.delay-1{animation-delay:.1s}.delay-2{animation-delay:.25s}.delay-3{animation-delay:.4s}.delay-4{animation-delay:.55s}.delay-5{animation-delay:.7s}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.3}}
+.live-dot{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;margin-right:.5rem;animation:pulse-dot 2s ease-in-out infinite}
+@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{gap:1.5rem}#hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;gap:3rem}.hero-right{grid-row:1}.research-grid{grid-template-columns:1fr}.proj-grid{grid-template-columns:1fr 1fr}section{padding:4rem 1.5rem}.exp-timeline::before{left:80px}.exp-item{grid-template-columns:80px 1fr;gap:1.5rem}.exp-item::before{left:77px}.exp-date{font-size:.62rem}.qual-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nav-links{display:none}.proj-grid{grid-template-columns:1fr}.qual-grid{grid-template-columns:1fr}.pub-item{grid-template-columns:1fr;gap:.8rem}.pub-year{display:none}.hero-btns{flex-direction:column}footer{flex-direction:column;gap:.5rem;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">KIM HYEOK JIN</span>
+  <ul class="nav-links">
+    <li><a href="#research">연구분야</a></li>
+    <li><a href="#publications">논문</a></li>
+    <li><a href="#experience">경력</a></li>
+    <li><a href="#projects">연구과제</a></li>
+    <li><a href="#contact">연락처</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="hero-tag fade-up delay-1"><span class="live-dot"></span>Ph.D. Student · 한국기계연구원 UST</div>
+    <h1 class="hero-name-ko fade-up delay-2">김혁진</h1>
+    <p class="hero-name-en fade-up delay-2">Kim Hyeok Jin — Ph.D. Student</p>
+    <div class="hero-role fade-up delay-3">한국기계연구원 자원순환연구실<br>UST 박사과정 · 친환경·기계 전공</div>
+    <p class="hero-desc fade-up delay-3">폐플라스틱·폐타이어 등 폐자원의 열분해를 통한 원료 및 연료 재활용 연구를 수행하고 있습니다. 환경공학적 관점에서 자원순환 기술의 최적화를 목표로 합니다.</p>
+    <div class="hero-tags fade-up delay-4">
+      <span class="tag">Pyrolysis</span>
+      <span class="tag">Waste Plastics</span>
+      <span class="tag">Resource Recycling</span>
+      <span class="tag">Hydrothermal Treatment</span>
+      <span class="tag">TGA / Kinetics</span>
+      <span class="tag">GC/MS Analysis</span>
+    </div>
+    <div class="hero-btns fade-up delay-5">
+      <a href="#publications" class="btn-primary">논문 보기</a>
+      <a href="#contact" class="btn-outline">연락하기</a>
+    </div>
+  </div>
+  <div class="hero-right fade-up delay-2">
+    <div class="stat-card">
+      <div class="stat-label">SCI(E) Publications</div>
+      <div class="stat-value">5+</div>
+      <div class="stat-sub">국내외 학술지 총 6편</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Research Experience</div>
+      <div class="stat-value">6+</div>
+      <div class="stat-sub">년간 폐자원 열분해 연구 경력</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">R&amp;D Projects</div>
+      <div class="stat-value">5+</div>
+      <div class="stat-sub">국가 R&amp;D 과제 참여</div>
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">연구 분야</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="research-grid">
+    <div class="research-item">
+      <div class="research-icon">♻️</div>
+      <div class="research-item-title">폐플라스틱 열분해</div>
+      <div class="research-item-desc">PP, PE, PS, PET 등 다양한 폐플라스틱의 무촉매 및 촉매 열분해 연구. Lab-scale 고정층 반응기를 이용한 반응조건 최적화 및 열분해유 회수·특성분석을 통한 1ton/day급 공정 설계 기초자료 제공.</div>
+    </div>
+    <div class="research-item">
+      <div class="research-icon">🔥</div>
+      <div class="research-item-title">폐타이어 및 폐자원 열분해</div>
+      <div class="research-item-desc">폐타이어를 포함한 다양한 폐자원의 열분해를 통한 연료화 및 원료 재활용 연구. 소각열회수, 에너지 회수효율 분석 및 시험·검사 수행.</div>
+    </div>
+    <div class="research-item">
+      <div class="research-icon">💧</div>
+      <div class="research-item-title">바이오매스 수열탄화</div>
+      <div class="research-item-desc">커피잔재물, 팜 오일 껍질(EFB), 하수슬러지 등 폐바이오매스의 수열처리(HTC)를 통한 연료특성 향상 연구. TGA, FT-IR, 원소분석 등 다양한 분석기법 활용.</div>
+    </div>
+    <div class="research-item">
+      <div class="research-icon">🔬</div>
+      <div class="research-item-title">재료 특성 분석</div>
+      <div class="research-item-desc">TGA/DTG Kinetic Analysis, GC/MS, XRD, FT-IR, Elemental Analysis, Proximate Analysis 등 열화학 분석 및 물질특성 평가. 반응 메커니즘 규명 및 최적 반응조건 도출.</div>
+    </div>
+  </div>
+</section>
+
+<section id="publications" style="background:var(--bg2)">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">논문</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="pub-list">
+    <div class="pub-item">
+      <span class="pub-badge badge-sci">SCI(E)</span>
+      <div class="pub-main">
+        <div class="pub-title">Methyl methacrylate (MMA) and alumina recovery from waste artificial marble powder pyrolysis</div>
+        <div class="pub-journal">Journal of Material Cycles and Waste Management (Springer) · Vol.23: 214–221</div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> et al. — 공동저자 (2nd/4)</div>
+      </div>
+      <div class="pub-year">2020</div>
+    </div>
+    <div class="pub-item">
+      <span class="pub-badge badge-sci">SCI(E)</span>
+      <div class="pub-main">
+        <div class="pub-title">Hydrothermal Treatment of Empty Fruit Bunches to Enhance Fuel Characteristics</div>
+        <div class="pub-journal">Energies (MDPI) · Vol.14(5): 1467</div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> et al. — <strong style="color:var(--accent)">주저자</strong> (1st/4)</div>
+      </div>
+      <div class="pub-year">2021</div>
+    </div>
+    <div class="pub-item">
+      <span class="pub-badge badge-sci">SCI(E)</span>
+      <div class="pub-main">
+        <div class="pub-title">Hydrothermal carbonization of spent coffee grounds</div>
+        <div class="pub-journal">Applied Sciences (MDPI) · Vol.11(14): 6542</div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> et al. — <strong style="color:var(--accent)">주저자</strong> (1st/2)</div>
+      </div>
+      <div class="pub-year">2021</div>
+    </div>
+    <div class="pub-item">
+      <span class="pub-badge badge-sci">SCI(E)</span>
+      <div class="pub-main">
+        <div class="pub-title">A study on torrefaction of spent coffee ground to improve its fuel properties</div>
+        <div class="pub-journal">Fuel (ELSEVIER) · Vol.318: 123643 — <strong style="color:var(--accent)">SCI(E)</strong></div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> et al. — 공동저자 (2nd/4)</div>
+      </div>
+      <div class="pub-year">2022</div>
+    </div>
+    <div class="pub-item">
+      <span class="pub-badge badge-domestic">국내</span>
+      <div class="pub-main">
+        <div class="pub-title">Polypropylene(PP), Polyethylene(PE) 폐플라스틱의 무촉매 열분해 특성 연구</div>
+        <div class="pub-journal">한국열환경공학회지 (환경에너지공학) · Vol.17(1): 48–63</div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> et al. — 공동저자 (2nd/3)</div>
+      </div>
+      <div class="pub-year">2022</div>
+    </div>
+    <div class="pub-item">
+      <span class="pub-badge badge-thesis">학위논문</span>
+      <div class="pub-main">
+        <div class="pub-title">아임계수를 이용한 바이오매스의 수열탄화 연구</div>
+        <div class="pub-journal">공주대학교 대학원 환경공학과 석사학위논문</div>
+        <div class="pub-authors"><span class="me">Kim HJ</span> — <strong style="color:var(--accent)">단독 저자</strong></div>
+      </div>
+      <div class="pub-year">2022</div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">경력</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-timeline">
+    <div class="exp-item current">
+      <div class="exp-date">2026.03 –<br>현재<div class="exp-current-badge">CURRENT</div></div>
+      <div class="exp-content">
+        <div class="exp-org">한국기계연구원 (UST 박사과정)</div>
+        <div class="exp-role">학생연구원</div>
+        <div class="exp-dept">친환경에너지본부 자원순환연구실</div>
+        <div class="exp-desc">폐자원 열분해 관련 R&D 과제 수행 및 시험·검사 (소각, 소각열회수, 열분해, 에너지 회수효율)</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2025.03 –<br>2025.10</div>
+      <div class="exp-content">
+        <div class="exp-org">한국기계연구원</div>
+        <div class="exp-role">인턴 연구원</div>
+        <div class="exp-dept">친환경에너지본부 자원순환연구실</div>
+        <div class="exp-desc">폐자원 열분해 관련 R&D 과제 수행 및 시험·검사</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2024.04 –<br>2024.09</div>
+      <div class="exp-content">
+        <div class="exp-org">KOTITI 시험연구원</div>
+        <div class="exp-role">선임연구원</div>
+        <div class="exp-dept">첨단융합산업본부 산업융합연구팀</div>
+        <div class="exp-desc">소재, 부품, 필터 재활용 관련 R&D 과제 기획 및 수행</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2022.02 –<br>2024.03</div>
+      <div class="exp-content">
+        <div class="exp-org">주식회사 이이씨</div>
+        <div class="exp-role">선임연구원</div>
+        <div class="exp-dept">환경·에너지 R&D Center</div>
+        <div class="exp-desc">환경 공학 컨설팅, 폐기물 재활용 관련 R&D 과제 기획 및 수행</div>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2021.05 –<br>2022.01</div>
+      <div class="exp-content">
+        <div class="exp-org">공주대학교 산학협력단</div>
+        <div class="exp-role">연구원</div>
+        <div class="exp-dept">에너지환경융합기술연구소</div>
+        <div class="exp-desc">폐플라스틱 연속식 열분해 공정 기술개발 R&D 과제 실무 (1ton/day급)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--bg2)">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">연구 과제</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-agency">한국산업기술평가관리원</div>
+      <div class="proj-title">1ton/day 규모 폐플라스틱 연속식 열분해 공정 기술 개발</div>
+      <div class="proj-period">2021.04 – 2024.12</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-agency">한국탄소산업진흥원</div>
+      <div class="proj-title">재활성화 기술을 이용한 공기청정기용 필터의 활성탄 자원순환 모델 실증</div>
+      <div class="proj-period">2024.05 – 2026.12</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-agency">한국환경산업기술원</div>
+      <div class="proj-title">인공지능 기반 스마트 재활용 선별장 및 운영시스템 사업화</div>
+      <div class="proj-period">2023.04 – 2024.12</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-agency">한국환경공단</div>
+      <div class="proj-title">고순도·고효율 AI기반 스마트 재활용 선별장 구축</div>
+      <div class="proj-period">2023.04 – 2023.11</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-agency">중소기업기술정보진흥원</div>
+      <div class="proj-title">수열처리방식을 적용한 하수슬러지의 연료자원화 기술</div>
+      <div class="proj-period">2018.12 – 2019.11</div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-agency">중소기업기술정보진흥원</div>
+      <div class="proj-title">버블유동층 열분해 기술을 이용한 폐인조대리석 재생시스템 개발</div>
+      <div class="proj-period">2018.06 – 2019.06</div>
+    </div>
+  </div>
+</section>
+
+<section id="qualifications">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">자격 및 어학</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="qual-grid">
+    <div class="qual-card lang">
+      <div class="qual-name">OPIc IM2</div>
+      <div class="qual-detail">영어 · 2023.05.27</div>
+    </div>
+    <div class="qual-card cert">
+      <div class="qual-name">폐기물처리기사</div>
+      <div class="qual-detail">한국산업인력공단 · 2019.12.20</div>
+    </div>
+    <div class="qual-card cert">
+      <div class="qual-name">ISO 45001 심사원</div>
+      <div class="qual-detail">OH&amp;S Management · 2024.05.29</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--bg2);text-align:center">
+  <div class="contact-inner">
+    <h2 class="contact-title">연락하기</h2>
+    <p class="contact-sub">연구 협력, 학술 교류, 기술 문의 등 언제든지 연락주세요.</p>
+    <div class="contact-links">
+      <a href="https://github.com/Joker-94-hjkim" class="contact-link" target="_blank">↗ GitHub</a>
+      <a href="mailto:kimhj94@kimm.re.kr" class="contact-link">✉ Email</a>
+      <a href="https://www.kimm.re.kr" class="contact-link" target="_blank">↗ 한국기계연구원</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 Kim Hyeok Jin · 한국기계연구원 UST 박사과정 (Ph.D. Student)</span>
+  <span class="footer-text">Built with GitHub Pages</span>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.research-item,.pub-item,.exp-item,.proj-card,.qual-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
